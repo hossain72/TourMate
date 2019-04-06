@@ -1,0 +1,217 @@
+{
+  "project_info": {
+    "project_number": "277458776742",
+    "firebase_url": "https://bitm-b0a4b.firebaseio.com",
+    "project_id": "bitm-b0a4b",
+    "storage_bucket": "bitm-b0a4b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277458776742:android:57d0a1d29932a508",
+        "android_client_info": {
+          "package_name": "com.bitm.phoneathentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277458776742-d4ndcegqa6c45auor4q0mlc6mjn6ivh5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bitm.phoneathentication",
+            "certificate_hash": "115b8b6311930741af2e95b882fe6f11f379921d"
+          }
+        },
+        {
+          "client_id": "277458776742-tqd64vavmd588nhignom4g825aj55oi5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bitm.phoneathentication",
+            "certificate_hash": "eb9b164df72385ab0fa317373bdfe7196a2a9166"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIZyjWuslkLpbAF9UyLG-IKaSRqnKE3hA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277458776742-1ustf3rrso0bk7dmjsf0mtn6soibp0vt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277458776742:android:9ae833b64fae20d2",
+        "android_client_info": {
+          "package_name": "com.bitm.realtimedatabase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277458776742-4lm71979epb9m3b5pldfm974j7ueol5k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bitm.realtimedatabase",
+            "certificate_hash": "115b8b6311930741af2e95b882fe6f11f379921d"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIZyjWuslkLpbAF9UyLG-IKaSRqnKE3hA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277458776742-1ustf3rrso0bk7dmjsf0mtn6soibp0vt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277458776742:android:07fcdc490403bc8d",
+        "android_client_info": {
+          "package_name": "com.bitm.realtimedb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277458776742-47kikgmn61s9kunfrgog347d2c9r8res.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bitm.realtimedb",
+            "certificate_hash": "115b8b6311930741af2e95b882fe6f11f379921d"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIZyjWuslkLpbAF9UyLG-IKaSRqnKE3hA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277458776742-1ustf3rrso0bk7dmjsf0mtn6soibp0vt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277458776742:android:509fc75e214b4fe3",
+        "android_client_info": {
+          "package_name": "com.remon.tourmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277458776742-0o4knupivn50l4air4kmfvcsc9rnaeu8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.remon.tourmate",
+            "certificate_hash": "115b8b6311930741af2e95b882fe6f11f379921d"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIZyjWuslkLpbAF9UyLG-IKaSRqnKE3hA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277458776742-1ustf3rrso0bk7dmjsf0mtn6soibp0vt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277458776742:android:14b904fe9ebdc287",
+        "android_client_info": {
+          "package_name": "com.shoaib.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277458776742-t1ia134o4oqoen4e1k7ih0ka8dce0tjc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shoaib.firebase",
+            "certificate_hash": "eb9b164df72385ab0fa317373bdfe7196a2a9166"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIZyjWuslkLpbAF9UyLG-IKaSRqnKE3hA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277458776742-1ustf3rrso0bk7dmjsf0mtn6soibp0vt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277458776742:android:1d388a9b58e45153",
+        "android_client_info": {
+          "package_name": "remon.com.realtimedb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277458776742-7t8lua8qq3sqg1k2eohkpc14471vf7ou.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "remon.com.realtimedb",
+            "certificate_hash": "eb9b164df72385ab0fa317373bdfe7196a2a9166"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIZyjWuslkLpbAF9UyLG-IKaSRqnKE3hA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "277458776742-1ustf3rrso0bk7dmjsf0mtn6soibp0vt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
