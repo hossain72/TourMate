@@ -1,6 +1,7 @@
 package com.remon.tourmate;
 
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TextInputLayout;
@@ -17,20 +18,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.remon.tourmate.databinding.ActivitySignInBinding;
 
 public class SignInActivity extends AppCompatActivity {
 
-    private ImageView logoIV;
-    private EditText emailET;
-    private TextInputLayout passwordTIL;
-    private Button signInBtn;
-    private TextView signUpTV;
     private FirebaseAuth firebaseAuth;
+    private ActivitySignInBinding activitySignInBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        activitySignInBinding = DataBindingUtil.setContentView(this,R.layout.activity_sign_in);
 
         initialize();
         clickListener();
@@ -41,29 +39,23 @@ public class SignInActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        logoIV = findViewById(R.id.logoIV);
-        emailET = findViewById(R.id.emailET);
-        passwordTIL = findViewById(R.id.passwordTIL);
-        signInBtn = findViewById(R.id.signInBtn);
-        signUpTV = findViewById(R.id.signUpTV);
-
     }
 
     private void clickListener() {
 
-        signUpTV.setOnClickListener(new View.OnClickListener() {
+        activitySignInBinding.signUpTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SignInActivity.this, MainActivity.class));
             }
         });
 
-        signInBtn.setOnClickListener(new View.OnClickListener() {
+        activitySignInBinding.signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String email = emailET.getText().toString();
-                String password = passwordTIL.getEditText().getText().toString();
+                String email = activitySignInBinding.emailET.getText().toString();
+                String password = activitySignInBinding.passwordTIL.getEditText().getText().toString();
 
                 if (email.equals("") || password.equals("")) {
                     Toast.makeText(SignInActivity.this, "Please enter required field", Toast.LENGTH_SHORT).show();
@@ -84,7 +76,9 @@ public class SignInActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(SignInActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignInActivity.this, NavigationActivity.class));
+                    Intent intent = new Intent(SignInActivity.this, NavigationActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(SignInActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                 }
