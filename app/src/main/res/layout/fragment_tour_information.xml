@@ -6,14 +6,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tour Information"
-            android:layout_centerInParent="true"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:id="@+id/tourInformationTV"/>
+            android:layout_height="match_parent"
+            android:id="@+id/tourInformationList">
+
+        </android.support.v7.widget.RecyclerView>
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
