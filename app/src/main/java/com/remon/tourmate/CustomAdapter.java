@@ -5,11 +5,21 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.remon.tourmate.databinding.TourInformationBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
@@ -17,6 +27,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     private TourInformationBinding tourInformationBinding;
     private List<TourInformation> informationList;
     private Context context;
+    private ImageView popUpMenu;
+    private FirebaseDatabase firebaseDatabase;
+    private String tourID;
 
     public CustomAdapter(List<TourInformation> informationList, Context context) {
         this.informationList = informationList;
@@ -33,14 +46,67 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
         TourInformation tourInformation = informationList.get(i);
 
         viewHolder.informationBinding.tourNameTV.setText(tourInformation.getTourName());
         viewHolder.informationBinding.tourDescriptionTV.setText(tourInformation.getTourDescription());
+        viewHolder.informationBinding.tourBudgetTV.setText(tourInformation.getTourBudget());
         viewHolder.informationBinding.startDateTV.setText(tourInformation.getStartDate());
         viewHolder.informationBinding.endDateTV.setText(tourInformation.getEndDate());
+
+        viewHolder.informationBinding.popUpMenuIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                PopupMenu popupMenu = new PopupMenu(context, viewHolder.informationBinding.popUpMenuIV);
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+                popupMenu.show();
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        switch (item.getItemId()) {
+
+                            case R.id.deleteItem: {
+
+                                final DatabaseReference databaseReference = firebaseDatabase.getReference().child("tourMate").child("tourInformation");
+
+                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if (dataSnapshot.exists()) {
+                                            for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                                tourID = data.getKey();
+//                                                Toast.makeText(context, tourID, Toast.LENGTH_SHORT).show();
+                                            }
+                                            databaseReference.child(tourID).removeValue();
+                                            notifyDataSetChanged();
+                                        }
+                                    }
+
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
+                            }
+
+                        }
+
+                        return false;
+                    }
+                });
+
+            }
+        });
 
     }
 

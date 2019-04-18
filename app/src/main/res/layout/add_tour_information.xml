@@ -29,10 +29,19 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:hint="Enter Tour Description"
-        android:imeOptions="actionDone"
+        android:imeOptions="actionNext"
         android:lines="10"
-        android:minLines="4"
-        android:inputType="textMultiLine"/>
+        android:minLines="1"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/tourBudgetET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="Enter Tour budget"
+        android:imeOptions="actionGo"
+        android:inputType="numberDecimal"/>
 
     <EditText
         android:id="@+id/startDateET"

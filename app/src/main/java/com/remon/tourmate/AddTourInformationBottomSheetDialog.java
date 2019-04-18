@@ -31,7 +31,7 @@ public class AddTourInformationBottomSheetDialog extends BottomSheetDialogFragme
 
     View view;
     private AddTourInformationBinding addTourInformationBinding;
-    private EditText tourNameET, tourDescriptionET, startDateET, endDateET;
+    private EditText tourNameET, tourDescriptionET, tourBudgetET, startDateET, endDateET;
     private Button saveTourInformationBtn;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
@@ -57,6 +57,7 @@ public class AddTourInformationBottomSheetDialog extends BottomSheetDialogFragme
 
         tourNameET = view.findViewById(R.id.tourNameET);
         tourDescriptionET = view.findViewById(R.id.tourDescriptionET);
+        tourBudgetET = view.findViewById(R.id.tourBudgetET);
         startDateET = view.findViewById(R.id.startDateET);
         endDateET = view.findViewById(R.id.endDateET);
         saveTourInformationBtn = view.findViewById(R.id.saveTourInformationBtn);
@@ -85,13 +86,14 @@ public class AddTourInformationBottomSheetDialog extends BottomSheetDialogFragme
 
                 String tourName = tourNameET.getText().toString();
                 String tourDescription = tourDescriptionET.getText().toString();
-                String stratDate = startDateET.getText().toString();
+                String tourBudget = tourBudgetET.getText().toString();
+                String startDate = startDateET.getText().toString();
                 String endDate = endDateET.getText().toString();
 
-                if (tourName.equals("") && tourDescription.equals("") && stratDate.equals("") && endDate.equals("")) {
+                if (tourName.equals("") && tourDescription.equals("") && tourBudget.equals("") && startDate.equals("") && endDate.equals("")) {
                     Toast.makeText(getActivity(), "Enter required field", Toast.LENGTH_SHORT).show();
                 } else {
-                    saveTourInformationDatabase(new TourInformation(tourName, tourDescription, stratDate, endDate));
+                    saveTourInformationDatabase(new TourInformation(tourName, tourDescription, tourBudget, startDate, endDate));
                 }
 
             }

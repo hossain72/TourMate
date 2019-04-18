@@ -14,8 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +87,9 @@ public class NavigationActivity extends AppCompatActivity
         } else if (id == R.id.tour_moments) {
             fragment = new TourMomentFragment();
         } else if (id == R.id.logout) {
-            Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+
+            signOut();
+
         }
 
         if (fragment != null){
@@ -103,4 +107,13 @@ public class NavigationActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.fragment, fragment);
         fragmentTransaction.commit();
     }
+
+    private void signOut() {
+        FirebaseAuth.getInstance().signOut();
+        finish();
+        Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
 }

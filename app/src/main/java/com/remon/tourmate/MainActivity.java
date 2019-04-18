@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main);
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         initialize();
         clickListener();
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding.signInTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,SignInActivity.class));
+                startActivity(new Intent(MainActivity.this, SignInActivity.class));
             }
         });
 
@@ -78,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
                 String password = activityMainBinding.passwordTIL.getEditText().getText().toString();
                 String confirmPassword = activityMainBinding.confirmPasswordTIL.getEditText().getText().toString();
 
-                if (name.equals("") || email.equals("")){
+                if (name.equals("") || email.equals("")) {
                     Toast.makeText(MainActivity.this, "Enter required field", Toast.LENGTH_LONG).show();
-                }else if (password.contains(confirmPassword)){
-                    createUserWithEmailAndPassword(email,password);
+                } else if (password.contains(confirmPassword)) {
+                    createUserWithEmailAndPassword(email, password);
                     signIn(new User(name, email, password));
                 }
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void createUserWithEmailAndPassword(String email, String password) {
 
-        firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
@@ -111,16 +111,17 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.child(userId).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(MainActivity.this, SignInActivity.class));
-                }else{
+                } else {
                     Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
     }
+
 
 
 }

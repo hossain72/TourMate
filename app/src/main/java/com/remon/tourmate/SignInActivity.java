@@ -32,6 +32,7 @@ public class SignInActivity extends AppCompatActivity {
 
         initialize();
         clickListener();
+        currentUser();
 
     }
 
@@ -85,6 +86,16 @@ public class SignInActivity extends AppCompatActivity {
             }
 
         });
+
+    }
+
+    private void currentUser() {
+
+        if (firebaseAuth.getCurrentUser() != null){
+            Intent intent = new Intent(SignInActivity.this, NavigationActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
 
     }
 

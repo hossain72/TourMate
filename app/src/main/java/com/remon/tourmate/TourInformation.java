@@ -2,22 +2,24 @@ package com.remon.tourmate;
 
 public class TourInformation {
 
-    String tourId, tourName, tourDescription, startDate, endDate;
+    String tourId, tourName, tourDescription, tourBudget, startDate, endDate;
 
     public TourInformation() {
     }
 
-    public TourInformation(String tourName, String tourDescription, String startDate, String endDate) {
+    public TourInformation(String tourId, String tourName, String tourDescription, String tourBudget, String startDate, String endDate) {
+        this.tourId = tourId;
         this.tourName = tourName;
         this.tourDescription = tourDescription;
+        this.tourBudget = tourBudget;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public TourInformation(String userid, String tourName, String tourDescription, String startDate, String endDate) {
-        this.tourId = userid;
+    public TourInformation(String tourName, String tourDescription, String tourBudget, String startDate, String endDate) {
         this.tourName = tourName;
         this.tourDescription = tourDescription;
+        this.tourBudget = tourBudget;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -44,5 +46,9 @@ public class TourInformation {
 
     public String getEndDate() {
         return endDate;
+    }
+
+    public String getTourBudget() {
+        return tourBudget;
     }
 }
