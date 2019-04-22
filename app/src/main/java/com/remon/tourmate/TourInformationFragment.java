@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,12 +22,16 @@ import com.remon.tourmate.databinding.FragmentTourInformationBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TourInformationFragment extends Fragment {
+public class TourInformationFragment extends Fragment implements CustomAdapter.TourItemActionListener {
 
     private FragmentTourInformationBinding informationBinding;
     private CustomAdapter customAdapter;
     private List<TourInformation> informationList;
     private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth firebaseAuth;
+    private String userId, tourId;
+    private DatabaseReference rootRef, userIdRef, tourRef;
+    private Fragment fragment;
 
     @Nullable
     @Override
@@ -40,7 +45,7 @@ public class TourInformationFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        firebaseAuth = FirebaseAuth.getInstance();
         initialization();
         clickListener();
         initRecyclerView();
@@ -52,6 +57,7 @@ public class TourInformationFragment extends Fragment {
 
         informationList = new ArrayList<>();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        userId = firebaseAuth.getCurrentUser().getUid();
 
     }
 
@@ -69,21 +75,24 @@ public class TourInformationFragment extends Fragment {
 
     private void initRecyclerView() {
         informationBinding.tourInformationList.setLayoutManager(new LinearLayoutManager(getContext()));
-        customAdapter = new CustomAdapter(informationList, getContext());
+        customAdapter = new CustomAdapter(informationList, getContext(), this);
         informationBinding.tourInformationList.setAdapter(customAdapter);
     }
 
     private void getTourInformationDb() {
 
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child("tourMate").child("tourInformation");
+        rootRef = firebaseDatabase.getReference().child("tourMate");
+        userIdRef = rootRef.child("userId").child(userId);
+        tourRef = userIdRef.child("tourInformation");
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        tourRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
                     informationList.clear();
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        tourId = data.getKey();
                         TourInformation tourInformation = data.getValue(TourInformation.class);
                         informationList.add(tourInformation);
                         customAdapter.notifyDataSetChanged();
@@ -100,4 +109,13 @@ public class TourInformationFragment extends Fragment {
 
     }
 
+    @Override
+    public void onItemDelete(String tourId) {
+        tourRef.child(tourId).removeValue();
+    }
+
+    @Override
+    public void onItemUpdate(String tourId) {
+
+    }
 }

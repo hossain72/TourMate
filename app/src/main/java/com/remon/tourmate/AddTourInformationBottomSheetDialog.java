@@ -23,18 +23,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.remon.tourmate.databinding.AddTourInformationBinding;
 
 import java.util.Calendar;
 
 public class AddTourInformationBottomSheetDialog extends BottomSheetDialogFragment {
 
     View view;
-    private AddTourInformationBinding addTourInformationBinding;
     private EditText tourNameET, tourDescriptionET, tourBudgetET, startDateET, endDateET;
     private Button saveTourInformationBtn;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
+    private String userId;
 
 
     @Nullable
@@ -42,18 +41,16 @@ public class AddTourInformationBottomSheetDialog extends BottomSheetDialogFragme
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.add_tour_information, container, false);
-
+        firebaseAuth = FirebaseAuth.getInstance();
         initialize();
         clickListener();
-
-
         return view;
     }
 
     private void initialize() {
 
-        firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        userId = firebaseAuth.getCurrentUser().getUid();
 
         tourNameET = view.findViewById(R.id.tourNameET);
         tourDescriptionET = view.findViewById(R.id.tourDescriptionET);
@@ -141,7 +138,8 @@ public class AddTourInformationBottomSheetDialog extends BottomSheetDialogFragme
 
     private void saveTourInformationDatabase(TourInformation tourInformation) {
 
-        DatabaseReference databaseReference = firebaseDatabase.getReference().child("tourMate").child("tourInformation");
+        DatabaseReference databaseReference = firebaseDatabase.getReference().
+                child("tourMate").child("userId").child(userId).child("tourInformation");
 
         String tourID = databaseReference.push().getKey();
         tourInformation.setTourId(tourID);

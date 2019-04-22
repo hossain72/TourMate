@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,12 +32,14 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private ActivityMainBinding activityMainBinding;
+    private String userId;
+    private User dataUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
+        firebaseAuth = FirebaseAuth.getInstance();
         initialize();
         clickListener();
 
@@ -44,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initialize() {
 
-        firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
     }
@@ -81,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
                 if (name.equals("") || email.equals("")) {
                     Toast.makeText(MainActivity.this, "Enter required field", Toast.LENGTH_LONG).show();
                 } else if (password.contains(confirmPassword)) {
-                    createUserWithEmailAndPassword(email, password);
-                    signIn(new User(name, email, password));
+                    createUser(email, password);
+                    dataUser = new User(name, email, password);
                 }
 
             }
@@ -90,12 +92,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void createUserWithEmailAndPassword(String email, String password) {
+    private void createUser(String email, String password) {
 
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
+                if (task.isSuccessful()) {
+                    userId = firebaseAuth.getCurrentUser().getUid();
+                    Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+                    signIn(dataUser);
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                activityMainBinding.signInTV.setText(e.getMessage());
             }
         });
 
@@ -104,9 +115,7 @@ public class MainActivity extends AppCompatActivity {
     private void signIn(User user) {
 
         DatabaseReference databaseReference = firebaseDatabase.getReference().child("tourMate").child("userId");
-
-        String userId = databaseReference.push().getKey();
-        user.setUserId(userId);
+        dataUser.setUserId(userId);
 
         databaseReference.child(userId).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

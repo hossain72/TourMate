@@ -3,6 +3,7 @@ package com.remon.tourmate;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -30,10 +31,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     private ImageView popUpMenu;
     private FirebaseDatabase firebaseDatabase;
     private String tourID;
+    private TourItemActionListener listener;
 
-    public CustomAdapter(List<TourInformation> informationList, Context context) {
+    public CustomAdapter(List<TourInformation> informationList, Context context, Fragment fragment) {
         this.informationList = informationList;
         this.context = context;
+        listener = (TourItemActionListener) fragment;
     }
 
     @NonNull
@@ -69,35 +72,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-
+                        String tourIdRef = informationList.get(i).getTourId();
                         switch (item.getItemId()) {
 
-                            case R.id.deleteItem: {
-
-                                final DatabaseReference databaseReference = firebaseDatabase.getReference().child("tourMate").child("tourInformation");
-
-                                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        if (dataSnapshot.exists()) {
-                                            for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                                tourID = data.getKey();
-//                                                Toast.makeText(context, tourID, Toast.LENGTH_SHORT).show();
-                                            }
-                                            databaseReference.child(tourID).removeValue();
-                                            notifyDataSetChanged();
-                                        }
-                                    }
-
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
-
-
-                            }
+                            case R.id.deleteItem:
+                                listener.onItemDelete(tourIdRef);
+                                break;
+                            case R.id.updateItem:
+                                listener.onItemUpdate(tourIdRef);
+                                break;
 
                         }
 
@@ -125,5 +108,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             informationBinding = tourInformationBinding;
 
         }
+    }
+    interface TourItemActionListener{
+        void onItemDelete(String tourId);
+        void onItemUpdate(String tourId);
     }
 }
