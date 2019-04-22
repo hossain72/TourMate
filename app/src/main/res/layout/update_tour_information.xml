@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update Tour Information"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/tourNameET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="Tour Name"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/tourDescriptionET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="Tour Description"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:lines="10"
+        android:minLines="1" />
+
+    <EditText
+        android:id="@+id/tourBudgetET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="Tour budget"
+        android:imeOptions="actionGo"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/startDateET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:hint="Start Date"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/endDateET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:hint="End Date"
+        android:inputType="date" />
+
+    <Button
+        android:id="@+id/updateTourInformationBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginBottom="20dp"
+        android:text="Update Information"
+        android:textAllCaps="false"
+        android:textSize="16sp" />
+
+</LinearLayout>
