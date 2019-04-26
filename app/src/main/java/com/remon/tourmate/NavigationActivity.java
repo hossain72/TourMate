@@ -86,6 +86,8 @@ public class NavigationActivity extends AppCompatActivity
             fragment = new TourExpenseFragment();
         } else if (id == R.id.tour_moments) {
             fragment = new TourMomentFragment();
+        }else if (id == R.id.weather) {
+            fragment = new CurrentWeatherFragment();
         } else if (id == R.id.logout) {
 
             signOut();

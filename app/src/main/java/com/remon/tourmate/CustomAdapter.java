@@ -43,7 +43,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
-        tourInformationBinding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.tour_information, viewGroup, false);
+        tourInformationBinding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()),
+                R.layout.tour_information, viewGroup, false);
 
         return new ViewHolder(tourInformationBinding);
     }

@@ -12,7 +12,8 @@
             android:text="Tour expense"
             android:layout_centerInParent="true"
             android:textAlignment="center"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:id="@+id/textView"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/addExpenseFABtn"
